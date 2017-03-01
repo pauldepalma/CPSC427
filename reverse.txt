@@ -1,0 +1,3 @@
+rev(L,R) :- rev(L, [], R).
+rev([], Temp, Temp).
+rev([H|T], Temp, R) :- rev(T, [H|Temp],R). 

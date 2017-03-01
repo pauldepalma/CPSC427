@@ -10,4 +10,5 @@ parent(antonio,ralph).
 parent(fabio,antonio).
 parent(paul,katie).
 ancestor(X,Y) :- parent(X,Y).
-ancestor(X,Z) :- parent(X,Y), ancestor(Y,Z).
+ancestor(X,Y) :- parent(Z,Y), ancestor(X,Z).
+
