@@ -114,3 +114,72 @@
         plot(X,Y)
 	plot(X,Y1,'r')
         plots a red cosine curve over a blue sine curve
+
+30.	A = magic(5)
+	B = A(:,2) --> B holds the second column of A		
+        size(B) --> tells us that B is column vector 5 X 1
+
+31.	C = A(2,:) --> C holds the second row of B
+
+32	Loading a csv file into octave
+	XY = csvread("data.csv") where data.csv is a csv file
+
+        where data.csv was taken from github.com/mattnedrich/GradientDescentExample
+
+	size(XY) --> tells us that XY is a 100 X 2 matrix
+
+33.	Transform XY into column vectors 
+        X = XY(:,1) --> All rows from the first colum
+	Y = XY(:,2) --> All rows from the second column
+
+34.	Do a scatter plot of X and Y with 10 point red square filled markers
+	scatter(X,Y,10,'r','s',"filled")
+
+35.	Inserting a final column a zeroes 
+	V = magic(5)
+	sz = size(V,1) --> rows in V 
+        z = zeros(sz,1) --> colum vector of zeros with sz rows 
+	V = [V,z]
+
+36.	35 done in a single line
+	V = [V,zeros(size(V,1),1]
+
+37.     Insert an initial column of ones
+	V = [ones(size(V,1),1),V]
+
+38.     A for loop
+        V = zeros(15,1) --> a column vector of 15 zeros
+        for i = 1:size(V,1)
+          V(i) = 2^i
+        end;
+
+39.	A while loop
+	V = zeros(10,1)
+        i = 1;
+        while i <= size(V,1)
+          V(i) = 2^i;
+          i = i + 1;
+        end;
+
+40.	Conditional
+        if V(1) == 1
+           disp("one");
+        else
+           disp("not one")
+        end;
+
+41.     Functions
+        Create a file my_exp.m containing
+        function [value] = my_exp(base,exp)
+          value = base^exp;
+
+        to execute, go to correct directory where the funcstion is saved (pwd
+        and cd work from within octave)
+        [v] = my_exp(2,3);
+
+  
+        
+
+
+
+	
