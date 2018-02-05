@@ -2,7 +2,7 @@
 ex2.pl
 A more complex backtracking program with a recursive call 
 */
-parent(marguerite,paul).
+parent(margarita,paul).
 parent(eleanora,marguerite).
 parent(anna,eleanora).
 parent(ralph,paul).
