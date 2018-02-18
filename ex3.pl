@@ -1,8 +1,8 @@
 /*
-ex2.pl
+ex3.pl
 A more complex backtracking program with a recursive call 
 */
-parent(margarita,paul).
+parent(marguerite,paul).
 parent(eleanora,marguerite).
 parent(anna,eleanora).
 parent(ralph,paul).
