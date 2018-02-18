@@ -4,7 +4,7 @@ Paul De Palma
 GU Username: depalma
 ex4.py
 Generates first-level child states from an initial state of the 8-puzzle 
-a defined initial state
+Usage: python proj4.py
 '''
 
 
@@ -19,30 +19,27 @@ class EightPuzzle:
     def __init__(self):
         #child states will be kept in a list
         #the constructor adds the initial (i.e., parent state) to the list
-        self.matrix_lst = [[row for row in _init_state]]
+        self.state_lst = [[row for row in _init_state]]
 
     #displays all states in the list
     def display(self):
-        for matrix in self.matrix_lst:
-            for row in matrix:
+        for state in self.state_lst:
+            for row in state:
                 print row
             print ""
         
 
-    #returns (row,col) of value in state indexed by matrix_idx  
-    def find_coord(self, value, matrix_idx):
-        if value < 0 or value > 8:
-            raise Exception("value out of range")
-
+    #returns (row,col) of value in state indexed by state_idx  
+    def find_coord(self, value, state_idx):
         for row in range(3):
             for col in range(3):
-                if self.matrix_lst[matrix_idx][row][col] == value:
+                if self.state_lst[state_idx][row][col] == value:
                     return (row,col)
                 
     #returns list of (row, col) tuples which can be swapped for blank
-    #these form the legal moves of state matrix_idx within the state list 
-    def get_new_moves(self, matrix_idx):
-        row, col = self.find_coord(0,matrix_idx) #get row, col of blank
+    #these form the legal moves of state state_idx within the state list 
+    def get_new_moves(self, state_idx):
+        row, col = self.find_coord(0,state_idx) #get row, col of blank
         moves = []
         if row > 0:
             moves.append((row - 1, col))  #move from directly above
@@ -55,20 +52,21 @@ class EightPuzzle:
         return moves
 
 
-    
-    def generate_states(self,matrix_idx):
+    #Generates all child states for the state indexed by state_idx
+    #in the state list.  Appends child states to the list
+    def generate_states(self,state_idx):
         #get legal moves
-        move_lst = self.get_new_moves(matrix_idx)
+        move_lst = self.get_new_moves(state_idx)
         
         #find coordinates of the blank position
-        blank = self.find_coord(0,matrix_idx)
+        blank = self.find_coord(0,state_idx)
 
         #shift the blank and tile to be moved for each move 
-        #append resulting state to the matrix list
+        #append resulting state to the state list
         for tile in move_lst:
-            #create a new matrix using deep copy 
+            #create a new state using deep copy 
             #ensures that matrices are completely independent
-            clone = deepcopy(self.matrix_lst[matrix_idx])
+            clone = deepcopy(self.state_lst[state_idx])
 
             #move tile to position of the blank
             clone[blank[0]][blank[1]] = clone[tile[0]][tile[1]]
@@ -76,11 +74,10 @@ class EightPuzzle:
             #set tile position to 0                          
             clone[tile[0]][tile[1]] = 0
             
-            #append new game configuration to the list of game configurations
-            self.matrix_lst.append(clone)
+            #append child state to the list of states.
+            self.state_lst.append(clone)
 
 def main():
-
     p = EightPuzzle()
     p.generate_states(0)
     p.display()
