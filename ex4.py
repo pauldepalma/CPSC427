@@ -5,8 +5,10 @@ GU Username: depalma
 ex4.py
 Generates first-level child states from an initial state of the 8-puzzle 
 Usage: python proj4.py
+References
+1. An Eight-Puzzle Solver in Python, downloaded: 2/18/18 from 
+   https://gist.github.com/flatline/8382021
 '''
-
 
 from copy import deepcopy
 
