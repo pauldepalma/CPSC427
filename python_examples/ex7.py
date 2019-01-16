@@ -6,7 +6,6 @@ Demonstrates
 
 def my_open():
     print ("This program will ask you to enter the name of an existing file.")
-    print ("Be sure to put quotation marks around the file name")
     while(True):
         fin = raw_input('Enter an input file name\n')
         try:
@@ -18,9 +17,8 @@ def my_open():
 
 def read_file_as_string(fin):
     string = fin.read()
-    for item in string:
-        print item
-    #print (string)
+    string = string.replace('o','O')
+    print(string)
 
 def read_file_as_line(fin):
     for line in fin:

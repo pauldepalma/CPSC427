@@ -1,22 +1,39 @@
 '''
 Demonstrates:
-    Plotting a function with matplotlib
-    Install matplotlib from the command line using pip (pip is package manager for
-    python)
+   Pickle is python's object serializer.  Pickle functions can write python objects to
+   files and read pickle files into python objects.
 
-To install matlib, bring up a terminal window:
-    sudo apt-get install python-pip
-    python -mpip install -U matplotlib
+   Usage:
+   >>from ex15 import pickle
+   >>pickler()
+   >>depickler()
 '''
 
-import matplotlib.pyplot as plt
+import pickle
 
 
-def main():
-    x = [i for i in range(0,10)]
-    y = [i**2 for i in x]
-    plt.plot(x,y)
-    plt.show()
+def pickler():
+    lsts_out = [ [i for i in range(10)] for j in range(5)]
+
+    print "original matrix"
+    for lst in lsts_out:
+        print lst
     
-main()
+    fout = open ('pickles.pkl','wb')
+    pickle.dump(lsts_out,fout)
+
+    fout.close()
+
+    
+
+def depickler():
+    
+    fin = open('pickles.pkl', 'rb')
+    lsts_in = pickle.load(fin)
+
+    print "pickled list"
+    for lst in lsts_in:
+        print lst
+
+    fin.close()
     
