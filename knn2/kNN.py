@@ -2,68 +2,68 @@ from numpy import *
 import operator
 
 
-#in_pt is a numpy array. It reps. the point whose classification is unknown
-#group is the matrix of points whose classification is knownlabels is the label vector, i.e., the classes
+#inPt is an array: [0,0] for example.  It is the point, the distance to we want
+#to calculate
+#group is the matrix from createDataSet
+#labels is the label vector above
 #k is the nearest neighbor parameter
-def classify(in_pt, group, labels, k):
-    distances = calcDistances(in_pt,group)
+def classify0(inPt, group, labels, k):
+    distances = calcDistances(inPt,group)
 
-    #produce a vector containing the rank of each item in the distances
-    #array from smallest to largest.
-    #suppose distances = [3,2,7]
-    #distances.argsort() produces [1,0,2]
-    distances_idx = distances.argsort()
+    #produce a list of indices to items in the distances vector.  index 0
+    #refers to the smallest item in distances, index 1 to the next smallest,
+    #and so forth. 
+    distancesIdx = distances.argsort()
 
-    #count votes
-    class_count = {}
+    #determine how many times each label appears in the top k entries
+    voteCount = {}
     for i in range(k):
-        #label associated with the ith entry in distancesIdx
-        vote_label = labels[distances_idx[i]]
-        #add 1 to entry if entry exists, else insert entry and add 1 to 0
-        class_count[vote_label] = class_count.get(vote_label,0) + 1
+        labelI = labels[distancesIdx[i]]
+        if labelI in voteCount:
+            voteCount[labelI] = voteCount[labelI] + 1
+        else:
+            voteCount[labelI] = 1
 
-    #produce a list of tuples (class,votes), sorted on votes
-    #class_count.iteritems() produces a generator which iterates through the entries
-    #in the dictionary.
-    #key=operator.itemgetter(1) tells sort to sort on the 2nd item in the tuple
-    #reverse=True: sort is from largest to smallest
-    sorted_class_count = sorted(class_count.iteritems(), key=operator.itemgetter(1),
+    #turn the dictionary into a list of tuples, sorting the tuples by the
+    #second item, i.e., the number of votes the label (the first item) got
+    #itemgetter gets the second (1) item in the dictionary.
+    #The idea here is that we're sorting the dictionary by the second item,
+    #the number of votes.
+    sortedVoteCount = sorted(voteCount.iteritems(), key=operator.itemgetter(1),
                              reverse = True)
-    
-    #the the 0th entry in the 0th tuple is the label with the most votes
-    #example: [('r',17),('a',3)
-    return sorted_class_count[0][0] #0th item in 0th tuple
+    #the first entry in sortedVoteCount is the label with the most votes
+    return sortedVoteCount[0][0] #0th item in 0th tuple
         
 
    
-#calculate Euclidean distance from each point in the data to the point
-#whose classification is unknown
-#in_pt is the point whose class is unknown
-#group is a matrix or points whose class is known.  The x,y coords of each
-#point form a row
-def calcDistances(in_pt,group):
+'''calculate the distance for each point in the original group to the new
+   point by Euclidean distance'''
+def calcDistances(inPt,group):
     #get number of rows in group
-    #That is, the number of points represented by out data
     dataSetSize = group.shape[0]
     
-    #Construct a matrix, where each row is inPt
-    m = tile(in_pt, (dataSetSize,1))
+    #create a matrix, each row of which is inPt
+    #ultimately what we'll do is find the distance from inPt to each
+    #of the points represented as a row in group
+    m = tile(inPt, (dataSetSize,1))
 
     #subtract each row in group from each row in m
-    diff_mat = m - group
+    diffMat = m - group
     
+
     #square each entry in diffMat
-    sq_diff_mat = diff_mat**2
+    sqDiffMat = diffMat**2
 
-    #Sum the squares of the x,y coordinates row-wise (axis = 1)
-    #This produces a vector, one entry per row
-    #each entry, i, is the square of the distance from a known point
-    #to the unknown point
-    sq_dist = sq_diff_mat.sum(axis = 1)
+    #Sum the squares of the x,y coordinates row-wise, producing a vector, one
+    #entry per row
+    #each entry, i, is the distance from the point represented by the ith
+    #row in group
+    sqDist = sqDiffMat.sum(axis = 1)
 
-    #Take the square root of each entry in sqDist
-    #This gives a vector of distances of each point to the unknown point
-    distances = sq_dist**.5
+    #find the hypotenuse. each entry represents the distance from the
+    #corresponding row in the original group to the new input
+    #This is the Euclidean distance
+    distances = sqDist**.5
 
     return distances
     
