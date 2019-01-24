@@ -1,5 +1,5 @@
 
-from operator import itemgetter
+import operator
 
 def calcDistances(unknown,movie_data):
     dist_lst = []
@@ -8,24 +8,31 @@ def calcDistances(unknown,movie_data):
       ydist = (point[1] - unknown[1])**2
       dist = (xdist + ydist) ** .05
       item = (dist,point[2])
+      #dist_lst is a list of tuples  of the form (distance, label)
       dist_lst.append(item)
-    return sorted(dist_lst,key=itemgetter(0))
+    return dist_lst
 
-def count_votes(distances,k):
+#count_votes is a collection of label:vote pairs, where 'vote' is the number
+#of votes gotten by the label.  sorted_vote_count is list of label,vote tuples,
+#sorted by votes in reverse numerical order.  So, the 0th item in the list is 
+#the tuple containing the label with the most votes, the 1st item is the tuple
+#containing the second highest vote count and so forth
+def count_votes(dist_lst,k):
     vote_count = {}
-    vote_count['r'] = 0
-    vote_count['a'] = 0
     for i in range(k):
-        label = distances[i][1]
-        if vote_count[label] > 0:
+        label = dist_lst[i][1]
+        if label in vote_count:
             vote_count[label] = vote_count[label] + 1
         else:
             vote_count[label] = 1
 
-    if (vote_count['r'] > vote_count['a']):
-        return 'r'
-    else:
-        return 'a'
+    sorted_vote_count = sorted(vote_count.iteritems(), 
+            key=operator.itemgetter(1),
+            reverse = True)
+
+    #0th item in 0th tuple, i.e, the label with the most votes
+    return sorted_vote_count[0][0] 
+
     
 def main():
     unknown = (18,90)
