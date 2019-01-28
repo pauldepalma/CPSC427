@@ -1,5 +1,7 @@
 from numpy import *
 import operator
+import matplotlib
+import matplotlib.pyplot as plt
 
 '''
 in_pt is a tuple, (2,3), for example.  Calculate the distance from all points
@@ -77,23 +79,59 @@ def calc_distances(in_pt,group):
 file_name contains three columns of data plus a label column
 '''
 def file2matrix(file_name):
-    #initialize data matrix and label vector
+    #read file, initialize data matrix and label vector
     fin = open(file_name)
-    line_lst = fin.readlines()
-    mat = zeros((len(line_lst),3)) #num_lines X 3 matrix filled with zeros
-    class_label_vector = []
+    line_lst = fin.readlines() #list of lines from file_name
+    data_matrix = zeros((len(line_lst),3)) #num_lines X 3 matrix filled with zeros
+    labels_vector = []
 
-    #populate date matrix and label vector
+    #populate data matrix and label vector
     idx = 0
     for line in line_lst:
         line = line.strip()
-        lst = line.split('\t')
-        #copy the first three columns lst to row idx of mat
-        mat[idx,:] = lst[0:3]
-        #copy last column of list to row idx of mat
-        class_label_vector.append((lst[-1]))
+        lst = line.split('\t') #list of columns forming a line
+        #copy the first three columns of the line to row idx of data matrix
+        data_matrix[idx,:] = lst[0:3]
+        #copy last column of the line to label vector
+        labels_vector.append((lst[-1]))
         idx += 1
-    return mat, class_label_vector
+    return data_matrix, labels_vector
+
+def plot_data(data_matrix):
+    fig = plt.figure()
+    tr_fig = fig.add_subplot(1,1,1) #translate the axes up and to the right
+    #x = video games, y = ice cream
+    #tr_fig.scatter(data_matrix[:,1], data_matrix[:,2])
+    #x = frequent flyer miles, y = video games
+    tr_fig.scatter(data_matrix[:,0], data_matrix[:,1])
+    plt.show()
+
+def normalize(data_matrix):
+    #vectors composed of min and max of each column of data_matrix
+    min_vals = data_matrix.min(axis=0) 
+    max_vals = data_matrix.max(axis=0)
+
+    range_vals = max_vals - min_vals
+    
+    #number of rows in data_matrix
+    num_rows = data_matrix.shape[0] 
+
+    #matrix where each row is ranges 
+    ranges_data_matrix = tile(range_vals, (num_rows,1)) #matrix where each row is range_vals
+    min_data_matrix = tile(min_vals, (num_rows,1)) #matrix where each row is min_vals
+    
+    #compute the normalized matrix according to normalization technique
+    # norm = (orig_value - min_value) / range
+    # where range is max - min
+    #element-wise subtraction, followed by element-wise division
+    norm_data_matrix = (data_matrix - min_data_matrix)/ ranges_data_matrix
+    return norm_data_matrix, range_vals, min_vals 
+    
+    
+    
+                             
+    
+    
 
 
     
