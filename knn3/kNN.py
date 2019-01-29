@@ -105,7 +105,14 @@ def plot_data(data_matrix):
     #x = frequent flyer miles, y = video games
     tr_fig.scatter(data_matrix[:,0], data_matrix[:,1])
     plt.show()
-
+    
+'''
+Normalizes data matrix using a conventional normalization technique extended to matrices
+     norm = (orig_value - min_value) / range
+         where range is max - min
+         extended to matrices by using matrix element-wise subtraction followed
+         by matrix element-wise division
+'''
 def normalize(data_matrix):
     #vectors composed of min and max of each column of data_matrix
     min_vals = data_matrix.min(axis=0) 
@@ -125,7 +132,76 @@ def normalize(data_matrix):
     # where range is max - min
     #element-wise subtraction, followed by element-wise division
     norm_data_matrix = (data_matrix - min_data_matrix)/ ranges_data_matrix
-    return norm_data_matrix, range_vals, min_vals 
+    return norm_data_matrix, range_vals, min_vals
+
+'''
+Normalizes a single point using the technique described in normalize, but restricted to a vector
+'''
+def normalize_point(in_pt, min_vals, range_vals):
+    return (in_pt - min_vals) / range_vals
+
+'''
+Test classifier by:
+1. Holding out 10% of data
+2. Training classifier on 90% of data
+3. Testing classifer on held out data
+'''
+def test_classifier(norm_data_matrix, labels_vector):
+    hold_out_ratio = 0.10
+    num_rows = norm_data_matrix.shape[0]
+    num_tst_points = int(num_rows * hold_out_ratio)
+    error_ct = 0
+
+    '''
+    for each iteration over the test points, send to the classifier:
+    1. test point: the ith point in norm_data_matrix drawn from the top hold_out_ratio % of the data
+    2. training data: points drawn from the bottom hold_out_ration % of the data
+    3. an integer, k, which the classifier uses to choose the k nearest neighbors
+    '''
+    for i in range(num_tst_points):
+        result = classify(norm_data_matrix[i,:],
+                      norm_data_matrix[num_tst_points:num_rows,:],
+                      labels_vector[num_tst_points:num_rows],3)
+    
+        if (result != labels_vector[i]):
+            error_ct += 1.0
+            out1 = "Error on item " + str(i)
+            out2 = "  classifier says: " + str(result) + " real answer: " + str(labels_vector[i])
+            print out1
+            print out2
+            print
+            
+    print("Error Rate: %f" % (error_ct/float(num_tst_points) * 100)) + " percent"
+
+'''
+Uses user-input parameters to classify a dating candidate
+'''
+def classify_person(norm_data_matrix, range_vals, min_vals, labels_vector):
+    labels = ['in large doses', 'in small doses', 'not at all']
+    raw_labels = ['largeDoses', 'smallDoses', 'didntLike']
+    k = 3
+    percent_video = float(raw_input("percentage of time spent playing video games " +
+                                    "over the past year?\n"))
+    freq_flier_miles = float(raw_input("Number of frequent flyer miles earned in " +
+                                       "the past year?\n"))
+    liters_ice_cream = float(raw_input("Number of liters of ice cream eaten in " +
+                                       "the past year?\n"))
+
+    in_pt = array([freq_flier_miles, percent_video, liters_ice_cream])
+    in_pt_norm = normalize_point(in_pt, min_vals, range_vals)
+    
+    result = classify(in_pt_norm, norm_data_matrix, labels_vector, k)
+    for i in range(3):
+        if result == raw_labels[i]:
+            potential = labels[i]
+            break
+                  
+    print ("You will probably like this person: " + potential)
+    
+        
+              
+            
+    
     
     
     
