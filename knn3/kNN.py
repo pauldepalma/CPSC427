@@ -146,7 +146,7 @@ Test classifier by:
 2. Training classifier on 90% of data
 3. Testing classifer on held out data
 '''
-def test_classifier(norm_data_matrix, labels_vector):
+def test_classifier(norm_data_matrix, labels_vector,k):
     hold_out_ratio = 0.10
     num_rows = norm_data_matrix.shape[0]
     num_tst_points = int(num_rows * hold_out_ratio)
@@ -161,7 +161,7 @@ def test_classifier(norm_data_matrix, labels_vector):
     for i in range(num_tst_points):
         result = classify(norm_data_matrix[i,:],
                       norm_data_matrix[num_tst_points:num_rows,:],
-                      labels_vector[num_tst_points:num_rows],3)
+                      labels_vector[num_tst_points:num_rows],k)
     
         if (result != labels_vector[i]):
             error_ct += 1.0
@@ -173,31 +173,6 @@ def test_classifier(norm_data_matrix, labels_vector):
             
     print("Error Rate: %f" % (error_ct/float(num_tst_points) * 100)) + " percent"
 
-'''
-Uses user-input parameters to classify a dating candidate
-'''
-def classify_person(norm_data_matrix, range_vals, min_vals, labels_vector):
-    labels = ['in large doses', 'in small doses', 'not at all']
-    raw_labels = ['largeDoses', 'smallDoses', 'didntLike']
-    k = 3
-    percent_video = float(raw_input("percentage of time spent playing video games " +
-                                    "over the past year?\n"))
-    freq_flier_miles = float(raw_input("Number of frequent flyer miles earned in " +
-                                       "the past year?\n"))
-    liters_ice_cream = float(raw_input("Number of liters of ice cream eaten in " +
-                                       "the past year?\n"))
-
-    in_pt = array([freq_flier_miles, percent_video, liters_ice_cream])
-    in_pt_norm = normalize_point(in_pt, min_vals, range_vals)
-    
-    result = classify(in_pt_norm, norm_data_matrix, labels_vector, k)
-    for i in range(3):
-        if result == raw_labels[i]:
-            potential = labels[i]
-            break
-                  
-    print ("You will probably like this person: " + potential)
-    
         
               
             
