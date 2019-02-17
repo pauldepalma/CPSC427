@@ -1,5 +1,5 @@
 '''
-Demonstrates:
+Demonstrates
     Plotting a function with matplotlib
     Install matplotlib from the command line using pip (pip is package manager for
     python)
