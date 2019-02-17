@@ -1,2 +1,2 @@
-# CPSC475
-Files and programs for CPSC475
+# CPSC427
+Files and programs for CPSC427
