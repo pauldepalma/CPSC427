@@ -28,17 +28,16 @@ def gradient_descent(points, starting_b, starting_m, learning_rate, num_iter):
     return [b, m]
 
 def plot_results(points,m,b):
-    x_train = [point[0] for point in points]
-    y_train = [point[1] for point in points]
-    y_predict = [m*x + b for x in x_train]
-    plt.plot(x_train,y_predict,color='r')
-    plt.scatter(x_train,y_train,color='g')
+    x_training = [point[0] for point in points]
+    y_training = [point[1] for point in points]
+    y_prediction = [m*x + b for x in x_training]
+    plt.plot(x_training,y_prediction,color='r')
+    plt.scatter(x_training,y_training,color='g')
     plt.title("Iterative Linear Regression")
     plt.show()
 
 def init():
-
-    #read file into list of x,y coordinates, one set per line
+    #read file into list of x,y coordinates, one set of coords per line
     reader = list(csv.reader(open("input.csv", "rb"), delimiter=','))
     points = numpy.array(reader).astype('float')
 
