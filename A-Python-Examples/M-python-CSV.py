@@ -1,7 +1,7 @@
 '''
 Demonstrates:
    Reading a CSV file into a numpy array
-   Usage: python 3x17.py matrix.csv
+   Usage: python M-python-CSV.py M-python-CSV.csv 
 '''
 
 import csv
@@ -9,25 +9,16 @@ import numpy
 import sys
 
 def main():
-    fin = sys.argv[1]
-    reader = csv.reader(open(fin, 'rb'), delimiter= ',')
-
-    x = list(reader)
-
-    result = numpy.array(x).astype('float')
-    print fin
-    '''
-    print sys.argv[2]
-    print sys.argv[3]
-    stuff = sys.argv[3]
-    print stuff[0]
-    print stuff[1]
-    print stuff[2]
-    '''
-    print result
-   
-    for item in result:
-        print item
     
+    fin = sys.argv[1]
+    reader = list(csv.reader(open(fin, "rb"), delimiter= ','))
+
+    result = numpy.array(reader).astype('float')
+    print result
+  
+    #another way to read csv files into a numpy array
+
+    result = numpy.genfromtxt(sys.argv[1],delimiter=',')
+    print result
     
 main()
