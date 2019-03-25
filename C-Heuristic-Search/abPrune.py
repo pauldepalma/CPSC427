@@ -11,7 +11,7 @@ Demonstrates AB Pruning:
 --converts the file to a dictionary representation of a tree
 --implements the pseudo-code found on slide 28, E:Adversarial Games
 --the pseudo-code is from a classic book on AI (Nilsson, N. (1998). Artificial Intelligence: A New Synthesis. Morgan Kaufmann)
---I thank Jeff Wheadon (GU, class of 2018) for the core of maxVal and minVal.
+--Jeff Wheadon (GU, class of 2018) wrote the core maxVal and minVal.
 Usage 1:  python <program name> <file name> <player>
         python proj9_abPrune.py abEx5.txt max
 
