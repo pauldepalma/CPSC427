@@ -5,17 +5,20 @@ Team Member 1: Paul De Palma
 Team Member 2: None
 Submitted By Paul De Palma
 GU Username: depalma
-File Name: proj9_abPrune.py
+File Name: abPrune.py
 Demonstrates AB Pruning:
---reads file representation of a graph as input
+--reads file representation of a tree as input
 --converts the file to a dictionary representation of a tree
 --implements the pseudo-code found on slide 28, E:Adversarial Games
---the pseudo-code is from a classic book on AI (Nilsson, N. (1998). Artificial Intelligence: A New Synthesis. Morgan Kaufmann)
---Jeff Wheadon (GU, class of 2018) wrote the core maxVal and minVal.
+--the pseudo-code is from a classic book on AI: 
+  (Nilsson, N. (1998). Artificial Intelligence: A New Synthesis. 
+  Morgan Kaufmann)
+--Jeff Wheadon (GU, class of 2018) wrote the 1st draft of maxVal and minVal.
 Usage 1:  python <program name> <file name> <player>
-        python proj9_abPrune.py abEx5.txt max
+          python proj9_abPrune.py abEx5.txt max
 
-Usage 2: The program can also be run from idle, in which case the parameters have to be hard-coded
+Usage 2: The program can also be run from idle, in which case the 
+         parameters must be hard-coded
 
 '''
 
@@ -68,8 +71,9 @@ V 9 11
 
 The left-most characters are parent nodes.
 The first line indicates that the starting node is C.
-The function constructs a dictionary, extracts the root and deletes its entry, leaving, in
-this case, the dictionary representation of example 5:
+The function constructs a dictionary, extracts the root and deletes 
+its entry, leaving, in this case, the dictionary representation of
+example 5:
 
 graph = {'C' : ['A', 'D', 'E'],
              'A' : ['P', 'B'],
@@ -106,7 +110,6 @@ def AB(graph,root,alpha,beta,player):
     else:
         minVal(graph,root,alpha,beta)
         
-        
 
 def main():
     if len(sys.argv) > 1:           #parameters come from command line  
@@ -117,8 +120,6 @@ def main():
         player = 'max'
 
     root, graph = read_graph(file_name)
-
     AB(graph,root, None, None, player)
-    
 
 main()
