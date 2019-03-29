@@ -90,6 +90,7 @@ def main():
 
     #display all states in state_lst                    
     p.display()
+    print p.state_lst
 
 main()
 
