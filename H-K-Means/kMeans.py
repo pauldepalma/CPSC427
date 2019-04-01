@@ -1,4 +1,5 @@
-
+#First Draft
+#Mostly from Peter Harrington, Machine Learning in Action
 
 import numpy as np
 
