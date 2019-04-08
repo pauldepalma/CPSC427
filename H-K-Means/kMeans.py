@@ -1,5 +1,4 @@
-#First Draft
-#Mostly from Peter Harrington, Machine Learning in Action
+#Based on Peter Harrington, Machine Learning in Action
 
 import numpy as np
 
@@ -52,22 +51,31 @@ def kMeans(dataMat, k, distMeas=distEucl, createCent=randCent):
     #create k randomly placed centroids
     centroids = createCent(dataMat,k)  
 
-    #compute centroids
-    #your code goes here
+    
+    #your code goes here (I required about 15 lines)
         
     
             
-    return centroids       
+    return centroids, iter #is the number of iterations required
+
+def plot_results(dataMat, centroids):
+    #your code goes here.  The trick is to transfrom the incoming matrices 
+    #to lists
+    '''
+    On the same scatter plot, plot the points and the centroids
+    The centroid points should be a different shape and color than the data
+    points
+    '''
 
 def main():
     k = 4
     dataMat = loadData("testSet.txt")
 
-    centroids = kMeans(dataMat, k, distEucl, randCent)
+    centroids, iterations = kMeans(dataMat, k, distEucl, randCent)
 
-    print centroids
+    plot_results(dataMat, centroids)
    
-  
+    '''
     #test code for auxiliary functions 
     print "point 0"
     print dataMat[0]
@@ -79,6 +87,7 @@ def main():
     print
     print "distance from point 0 to point 1"
     print distEucl(dataMat[0], dataMat[1])
+    '''
 
     
 main()
