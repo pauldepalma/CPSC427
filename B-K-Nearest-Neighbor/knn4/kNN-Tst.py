@@ -39,9 +39,8 @@ the following one extracts the initial digit and stores it in a list
 '''
 def make_labels(path):
     
-'''
-extract the class number from the file name and return it to make_labels
-'''
+
+#extract the class number from the file name and return it to make_labels
 def class_number(file_name):
     
 
