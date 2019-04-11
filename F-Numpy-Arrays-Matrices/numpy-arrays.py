@@ -92,11 +92,10 @@ def main():
     print
 
     print "transpose"
-    b = np.array([ [1,2,3],[4,5,6] ])
+    b = np.array([ [1,3],[4,0],[2,1]])
     print b
     print b.transpose()
     print 
-
 
     print "create a magic square"
     print "N must be odd"
