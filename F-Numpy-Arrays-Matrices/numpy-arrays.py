@@ -61,19 +61,25 @@ def main():
     print P.shape
     print
 
-    print "element-wise operations"
+    print "dot product, power, reciprocal"
     x1 = np.array([1,2,3,4,5])
     print np.dot(x1,3)
     print np.power(x1,3)
     print 2**x1
     x2 = x1 * 2
     print x2
-    a = np.array([1,2,3,4])
-    b = np.ones(4) + 1
-    print a - b
     x3 = np.array([1.0,2.0,3.0,4.0,5.0])
     print np.reciprocal(x3)
     print
+
+    print "element-wise operations"
+    a = np.array([1,2,3,4])
+    b = np.ones(4) + 1
+    print a - b
+    a = np.array([ [1],[2],[3],[4] ])
+    b = np.array([ [1],[2],[3],[4] ])
+    print a * b
+    pnt
 
 
     print "identity and inverse matrices"
