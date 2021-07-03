@@ -19,38 +19,92 @@ def magic_square(N):
 
 
 def main():
-    print "3X2 matrix"
+    print("3X2 matrix")
     M = np.array([ [1,2],[3,4],[5,6] ])
-    print M
-    print
+    print(M)
+    print("Shape " + str(M.shape))
+    print()
 
-    print "row vector"
-    RV = np.array( [ [1],[2],[3] ])
-    print RV
-    print
+    print("column vector")
+    CV = np.array([ [1],[2],[3]  ])
+    print(CV)
+    print("Shape " + str(CV.shape))
+    print()
+   
+    print("row vector")
+    RV = np.array( [ [1,2,3] ])
+    print(RV)
+    print("Shape " + str(RV.shape))
+    print()
+   
 
-    print "column vector"
-    CV = np.array([1,2,3])
-    print CV
-    print    
-
-    print "dimensions"
-    print M.shape
-    print RV.shape
-    print CV.shape
-    print
-
-    print "special matrices"
-    A = np.ones((3,3))
-    print A
+    print("special matrices")
+    A = np.ones((3,2))
+    print("Fill with 1s")
+    print(A)
+    print(A.shape)
+    print()
+    
     B = np.zeros((3,2))
-    print B
-    C = np.full((2,2),7)
-    print C
-    D = np.random.random((5,5))
-    print D
-    print
+    print("Fill with 0s")
+    print(B)
+    print(B.shape)
+    print()
+    
+    C = np.full((3,2),7)
+    print("Fill with 7s")
+    print(C)
+    print(C.shape)
+    print()
 
+    D = np.random.random((3,2))
+    print("fill with random numbers")
+    print(D)
+    print(D.shape)
+    print()
+
+    E = np.random.randint(1,11,size=(3,2))
+    print("fill with random inbtegers in range [1..10]")
+    print(E)
+    print(E.shape)
+    print()
+
+    print("Scalar")
+    F = np.array([ [1,1],[2,2],[3,3] ])
+    print(F)
+    print("X 3")
+    print(F*3)
+    print()
+   
+
+    print("Dot(or inner )Product of two column vectors")
+    G = np.array([ [1],[2],[3] ])
+    print(G)
+    H = np.array([ [1],[2],[3] ])
+    print(H)
+    print("Transpose the first vector")
+    print("Row X Col")
+    G = G.T
+    print(G)
+    print(np.dot(G,H))
+    print()
+
+    print("Dot(or inner )Product of two row vectors")
+    I = np.array([ [1,2,3] ])
+    print(I)
+    J = np.array([ [1,2,3] ])
+    print(J)
+    print("Transpose the first vector")
+    print("Col X Row")
+    I = I.T
+    print(I)
+    print(np.dot(I,J))
+    print()
+    
+    quit()
+
+
+'''
     print "matrix multiplicaition"
     N = np.array([ [1,1],[2,2] ])
     print M
@@ -218,9 +272,9 @@ def main():
     print Z
 
 
-    
+'''    
 main()
 
 
 
-main()
+
