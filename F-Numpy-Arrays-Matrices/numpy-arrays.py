@@ -19,24 +19,24 @@ def magic_square(N):
 
 
 def main():
-    print("3X2 matrix")
-    M = np.array([ [1,2],[3,4],[5,6] ])
+    print("2X3 matrix")
+    M = np.array([ [1,2,3],[4,5,6] ])
     print(M)
     print("Shape " + str(M.shape))
     print()
 
     print("column vector")
-    CV = np.array([ [1],[2],[3]  ])
+    CV = np.array([ [10],[122],[3], [9] ])
     print(CV)
     print("Shape " + str(CV.shape))
     print()
+
    
     print("row vector")
-    RV = np.array( [ [1,2,3] ])
+    RV = np.array( [ [10,122,3,9] ])
     print(RV)
     print("Shape " + str(RV.shape))
     print()
-   
 
     print("special matrices")
     A = np.ones((3,2))
@@ -75,140 +75,165 @@ def main():
     print("X 3")
     print(F*3)
     print()
-   
 
-    print("Dot(or inner )Product of two column vectors")
-    G = np.array([ [1],[2],[3] ])
-    print(G)
-    H = np.array([ [1],[2],[3] ])
-    print(H)
-    print("Transpose the first vector")
-    print("Row X Col")
-    G = G.T
-    print(G)
-    print(np.dot(G,H))
+    print("addition")
+    M = np.array([ [1,0],[2,5], [3,1] ])
+    N = np.array([ [4,0.5],[2,5], [0,1] ])
+    print(M + N)
     print()
 
-    print("Dot(or inner )Product of two row vectors")
-    I = np.array([ [1,2,3] ])
+    print("scalar multiplication")
+    M = np.array([ [1,0],[2,5],[3,1] ])
+    print("3 * M")
+    print(3 * M)
+
+    print("transpose")
+    A = np.array([ ['a','b'],['c','d'] ])
+    print(A)
+    print("A transpose")
+    print(A.T)
+
+    print("matrix vector multiplication")
+    A = np.array([ [1,3],[4,0],[2,1] ])
+    B = np.array([ [1],[5] ])
+    print(A)
+    print(B)
+    print(np.matmul(A,B))
+
+    print("matrix maxtrix multiplication")
+    A = np.array([ [1,3,2], [4,0,1] ])
+    B = np.array([ [1,3],[0,1],[5,2] ])
+    print(A)
+    print(B)
+    print(np.matmul(A,B))
+    print()
+
+    print("Identity matrices")
+    A = np.array([ [1,2],[3,4] ])
+    I = np.array([ [1,0],[0,1] ])
+    print(A)
     print(I)
-    J = np.array([ [1,2,3] ])
-    print(J)
-    print("Transpose the first vector")
-    print("Col X Row")
-    I = I.T
-    print(I)
-    print(np.dot(I,J))
+    print(np.matmul(A,I))
     print()
     
-    quit()
+    print("matrix inverse")
+    A = np.array([ [3,4],[2,16] ])
+    print(A)
+    print(lin.inv(A))
+    print(np.matmul(A,lin.inv(A)))
+    print()
 
+    print("dot product")
+    print("two column vectors")
+    u = np.array([ [1],[2],[3] ])
+    v = np.array([ [4],[5],[6] ])
+    print(u)
+    print(v)
+    print(np.matmul(u.T,v))
+    print("two row vectors")
+    x = np.array([ [10, 20, 30] ])
+    y = np.array([ [2, 3, 4] ])
+    print(x)
+    print(y)
+    print(np.inner(x,y))
+    print()
 
-'''
-    print "matrix multiplicaition"
-    N = np.array([ [1,1],[2,2] ])
-    print M
-    print M.shape
-    print N.shape
-    P = np.matmul(M,N)
-    print P
-    print P.shape
-    print
+    print("power")
+    x = np.array([1,2,3,4,5])
+    print(x)
+    print(np.power(x,3))
+    print()
 
-    print "dot product, power, reciprocal"
-    x1 = np.array([1,2,3,4,5])
-    print np.dot(x1,3)
-    print np.power(x1,3)
-    print 2**x1
-    x2 = x1 * 2
-    print x2
-    x3 = np.array([1.0,2.0,3.0,4.0,5.0])
-    print np.reciprocal(x3)
-    print
+    print("reciprocal")
+    x = np.array([1.0,2.0,3.0,4.0,5.0])
+    print(np.reciprocal(x))
+    print()
 
-    print "element-wise operations"
+    print("element-wise operations")
     a = np.array([1,2,3,4])
     b = np.ones(4) + 1
-    print a - b
+    print(a - b)
     a = np.array([ [1],[2],[3],[4] ])
     b = np.array([ [1],[2],[3],[4] ])
-    print a * b
-    pnt
+    print(a * b)
+    print()
 
-
-    print "identity and inverse matrices"
+    print("4 x 4 identity matrix")
     x4 = np.eye(4)
-    print x4
-    a = np.array([[3.,4.],[2.,16.] ])
-    ainv = lin.inv(a)
-    print ainv
-    print np.matmul(a,ainv)
+    print(x4)
 
-    print "sum elements, columns and rows"
+    print("sum elements, columns and rows")
     a = np.array([[1,2],[3,4]])
-    print a.sum() #sum elements
-    print a.sum(axis=0) #sum columns
-    print a.sum(axis=1) #sum rows
-    print
+    print(a)
+    print("sum elements")
+    print(a.sum()) #sum elements
+    print("sum columns")
+    print(a.sum(axis=0)) #sum columns
+    print("sum rows")
+    print(a.sum(axis=1)) #sum rows
+    print()
 
-    print "transpose"
-    b = np.array([ [1,3],[4,0],[2,1]])
-    print b
-    print b.transpose()
-    print 
-
-    print "create a magic square"
-    print "N must be odd"
+    print("create a magic square")
+    print("sum of every row and every column is equal")
+    print("N must be odd")
     M = magic_square(3)
-    print M
-    print
+    print(M)
+    print()
 
-    print "max"
-    print np.max(M) #max element
-    print np.max(M,axis=0) #row vector with max of each col
-    print np.max(M,axis=1) #row vector with max of each row
-    print
+    print("max element")
+    print(np.max(M)) #max element
+    print("create row with max of each col")
+    print(np.max(M,axis=0))
+    print("create row with max of each rol")
+    print(np.max(M,axis=1)) 
+    print()
 
-    print "insert a colum of zeros into an existing matrix"
-    A = magic_square(3)
-    print A
-    B = np.insert(A,3,values=0,axis=1)
-    print B
-    print
+
+    print("insert a colum of zeros into an existing matrix")
+    A = magic_square(5)
+    print(A)
+    B = np.insert(A,5,values=0,axis=1)
+    print(B)
+    print()
+   
+    print("Duplicate the last column")
+    print(A)
+    C = np.insert(A,5,values=A[:,4], axis = 1)
+    print(C)
 
    
-    print "Duplicate the last column"
-    print A
-    C = np.insert(A,3,values=A[:,2], axis = 1)
-    print C
-   
 
-    print "Two Arguments for Vectorization"
-    print
+    print("Two Arguments for Vectorization")
+    print()
     
-    print "Two Matrices"
+    print("Two Matrices")
     X = np.array([[12,7,3],
                  [4,5,6],
                  [7,8,9]])
-    print X
-    print X.shape
-    print
+    print(X)
+    print(X.shape)
+    print()
     
     Y = np.array([[5,8,1,2],
                  [6,7,3,0],
                  [4,5,9,1]])
-    print Y
-    print Y.shape
-    print
+    print(Y)
+    print(Y.shape)
+    print()
 
-    print "vectorized matrix multiplication"
+    import time
+    print("vectorized matrix multiplication")
+    t0 = time.time()
     Z = np.matmul(X,Y)
-    print Z
-    print
+    t1 =time.time()
+    print(Z)
+    print("time = " + str(t1-t0))
+    print()
 
-    print "iterative matrix multiplication"
+    print("iterative matrix multiplication")
     Z = np.zeros((3,4))
 
+    t0 = time.time()
     #iterate over rows of X
     for rx in range(len(X)):
         #iterate over cols of Y
@@ -216,64 +241,11 @@ def main():
             #iterate over rows of Y
             for ry in range(len(Y)):
                 Z[rx][cy] += X[rx][ry] * Y[ry][cy]
-    print Z
-    print
-
-    print "another example"
-    print
-    print  "h_theta(X) = -40 _ 0.25 * x"
-    print "X is a 4 X 1 vector"
-   
-    X = np.array([[2104], [1416], [1534], [852]])
-    print X
-    print
-    
-    print "insert a col of zeroes before existing col 0"
-    X = np.insert(X,0,values=1,axis=1)
-    print X
-    print
- 
-    print "Theta is a 2 x 1 vector, theta0 followed by theta1"
-    Theta = np.array([[-40],[0.25]])
-    print Theta
-    print
-
-    print "vectorized product"
-    Z = np.matmul(X,Theta)
-    print Z
-    print
-   
-    print "iterative version"
-    Z = np.zeros((4,1))
-
-    #iterate over rows of X
-    for rx in range(len(X)):
-        #iterate over cols of Theta
-        for cy in range(len(Theta[0])):
-            #iterate over rows of Theta
-            for ry in range(len(Theta)):
-                Z[rx][cy] += X[rx][ry] * Theta[ry][cy]
-
-    print Z
-    print
+    t1 = time.time()
+    print(Z)
+    print("time = " + str(t1-t0))
     
     
-    print "Multiply Vectors"
-    X = np.array([[1,2,3]])
-    print X.shape
-
-    Y = np.array([ [1],
-                   [2],
-                   [3]])
-    print Y.shape
-
-
-    Z = np.matmul(X,Y)
-    print Z
-
-
-'''    
-main()
 
 
 
